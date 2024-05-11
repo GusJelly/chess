@@ -4,10 +4,10 @@ package uci
 
 import (
 	"bufio"
+	"chess"
+	"chess/engine"
 	"errors"
 	"fmt"
-	"github.com/malbrecht/chess"
-	"github.com/malbrecht/chess/engine"
 	"io"
 	"log"
 	"os/exec"

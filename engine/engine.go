@@ -3,8 +3,8 @@
 package engine
 
 import (
+	"chess"
 	"errors"
-	"github.com/malbrecht/chess"
 	"time"
 )
 

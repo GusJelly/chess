@@ -2,9 +2,9 @@ package uci
 
 import (
 	"bufio"
+	"chess"
+	"chess/engine"
 	"fmt"
-	"github.com/malbrecht/chess"
-	"github.com/malbrecht/chess/engine"
 	"io"
 	"log"
 	"os"
@@ -81,9 +81,9 @@ type infoTest struct {
 }
 
 var infoTests = []infoTest{
-	{"info nodes 1000 time 6789", nil, 0, &engine.Stats{0, 0, 1000, 6789 * time.Millisecond}},
+	{"info nodes 1000 time 6789", nil, 0, &engine.Stats{Depth: 0, SelDepth: 0, Nodes: 1000, Time: 6789 * time.Millisecond}},
 	{"info pv e7e5 g1f3 b8c3 f1b5 score cp 29", nil, -29, nil},
-	{"bestmove e7e5 ponder g1f3", &chess.Move{chess.E7, chess.E5, 0}, 0, nil},
+	{"bestmove e7e5 ponder g1f3", &chess.Move{From: chess.E7, To: chess.E5, Promotion: 0}, 0, nil},
 }
 
 func fakeEngine(r io.Reader, w io.WriteCloser) {
@@ -161,7 +161,7 @@ func TestEngine(t *testing.T) {
 
 	// test search
 	board := chess.MustParseFen("")
-	board = board.MakeMove(chess.Move{chess.E2, chess.E4, 0})
+	board = board.MakeMove(chess.Move{From: chess.E2, To: chess.E4, Promotion: 0})
 	e.SetPosition(board)
 
 	infoc := e.SearchDepth(1)
